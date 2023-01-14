@@ -626,7 +626,12 @@ exports.KickAh = (gc) => {
     return `Sepertinya kamu mengirimkan link group ini, kamu tidak akan di keluarkan`
     }
 /////////
-
+exports.gcOp = () => {
+    return `✅ Grup Berhasil Dibuka Oleh Admin Grup.`
+}
+exports.gcCls = () => {
+    return `✅ Grup Berhasil Ditutup Oleh Admin Grup.`
+}
 /////////
 exports.private = () =>{
 	return`Fitur hanya bisa di gunakan di private chat`
