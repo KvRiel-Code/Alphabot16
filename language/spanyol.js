@@ -623,7 +623,12 @@ exports.KickAh = (gc) => {
     return `Parece que enviaste el enlace de este grupo, no serás expulsado`
     }
 /////////
-
+exports.gcOp = () => {
+    return `✅ Grupo abierto con éxito por el administrador del grupo.`
+}
+exports.gcCls = () => {
+    return `✅ Grupo cerrado con éxito por el administrador del grupo.`
+}
 /////////
 exports.private = () =>{
 	return`La función solo se puede usar en el chat privado.`
