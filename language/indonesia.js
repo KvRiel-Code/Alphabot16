@@ -260,7 +260,7 @@ exports.NakDm = () => {
     return `Kirim nomer/tag/reply target yang ingin di demote !`
 }
 exports.Family = () => {
-    return `Masih Ada Sesi Yang Belum Diselesaikan!`
+    return `Soal ini belum selesai!`
 }
 exports.NoWm = (prefix, command) => {
     return `Kirim perintah ${prefix + command} packname|author`
@@ -327,8 +327,8 @@ exports.JwbErr = () => {
     return `❌ Jawaban Salah`
 }
 
-exports.JwbTrue = (tebak) => {
-return`🎮 ${tebak} 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`
+exports.JwbTrue = (tebak, exp) => {
+return`🎮 ${tebak} 🎮\n\nJawaban Benar 🎉\n+${exp} XP`
 }
 exports.TbGam = () => {
     return `Tebak Gambar`
@@ -368,15 +368,15 @@ exports.TbKan = () => {
 }
 
 exports.TbFamily = (soal, jawaban, find) => {
-    return `*Jawablah Pertanyaan Berikut :*\n${soal}\n\nTerdapat *${jawaban}* Jawaban ${find(v => v.includes(' ')) ? '(Beberapa Jawaban Terdapat Spasi)' : ''}`
+    return `*Jawablah Pertanyaan Berikut :*\n${soal}\n\nTerdapat *${jawaban}* Jawaban ${find}`
 }
 
 exports.TbAfk = (nama, afk) => {
     return `${nama} Telah Afk Dengan Alasan ${afk ? ': ' + afk : 'Nothing'}`
 }
 
-exports.TbGambar = (desk, time) => {
-    return `Silahkan Jawab Soal Di Atas Ini\n\nDeskripsi : ${desk}\nWaktu : ${time}`
+exports.TbGambar = (desk, time, exp) => {
+    return `Silahkan Jawab Soal Di Atas Ini\n\nDeskripsi : ${desk}\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
 exports.TbGambar_ = (jawaban) => {
     return `Waktu Habis\nJawaban:  ${jawaban}`
@@ -384,23 +384,23 @@ exports.TbGambar_ = (jawaban) => {
 exports.TbGambar__ = (jawaban, desk) => {
     return `Waktu Habis\nJawaban:  ${jawaban}}\nDeskripsi : ${desk}`
 }
-exports.TbKata = (soal, time) => {
-    return `Silahkan Jawab Pertanyaan Berikut\n\n${soal}\nWaktu : ${time}`
+exports.TbKata = (soal, time, exp) => {
+    return `Silahkan Jawab Pertanyaan Berikut\n\n${soal}\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
-exports.TbBendera = (time) => {
-    return `Silahkan Jawab Pertanyaan Diatas\n\nWaktu : ${time}`
+exports.TbBendera = (time, exp) => {
+    return `Silahkan Jawab Pertanyaan Diatas\n\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
-exports.TbKabupaten = (time) => {
-    return `Gambar Diatas Adalah Gambar dari Kabupaten?\nWaktu : ${time}`
+exports.TbKabupaten = (time, exp) => {
+    return `Gambar Diatas Adalah Gambar dari Kabupaten?\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
-exports.TbKimia = (soal, time) => {
-    return `Apa Arti Dari Simbol : *${soal}*?\nWaktu : ${time}`
+exports.TbKimia = (soal, time, exp) => {
+    return `Apa Arti Dari Simbol : *${soal}*?\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
-exports.TbLirik = (soal, time) => {
-    return `Ini Adalah Lirik Dari Lagu? : *${soal}*?\nWaktu : ${time}`
+exports.TbLirik = (soal, time, exp) => {
+    return `Ini Adalah Lirik Dari Lagu? : *${soal}*?\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
-exports.TbSusun = (soal, tipe, time) => {
-    return `*Jawablah Pertanyaan Berikut :*\nSoal : ${soal}\nTipe : ${tipe}\nWaktu : ${time}`
+exports.TbSusun = (soal, tipe, time, exp) => {
+    return `*Jawablah Pertanyaan Berikut :*\nSoal : ${soal}\nTipe : ${tipe}\nWaktu : ${time} detik\nHadiah : ${exp} XP`
 }
 exports.TbMath = (modes, prefix, command) => {
     return `Mode: ${modes}\nContoh penggunaan: ${prefix + command} medium`
@@ -627,10 +627,10 @@ exports.KickAh = (gc) => {
     }
 /////////
 exports.gcOp = () => {
-    return `✅ Grup Berhasil Dibuka Oleh Admin Grup.`
+    return `✅ Grup Berhasil Dibuka Oleh Admin Grup..`
 }
 exports.gcCls = () => {
-    return `✅ Grup Berhasil Ditutup Oleh Admin Grup.`
+    return `✅ Grup Berhasil Ditutup Oleh Admin Grup..`
 }
 /////////
 exports.private = () =>{
@@ -741,8 +741,6 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 
 ╭─❒ 「 Owner 」 
 │○ !setmenu [query]
-│○ !setmenu templateLocation
-│○ !setmenu templateTenor
 │○ !setmenu katalog
 │○ !setmenu katalog2
 │○ !setmenu list
@@ -776,6 +774,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !autorespond [on/off]
 │○ !antiviewonce [on/off]
 │○ !autobio [on/off]
+│○ !anticall [on/off]
 │○ !join [link]
 │○ !self
 │○ !public [only bot]
@@ -916,6 +915,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !deldemote
 │○ !nsfw [on/off]
 │○ !antilink [on/off]
+│○ !antiwame [on/off]
 │○ !take packname|author
 │○ !group [open/close]
 │○ !tagall [text]
@@ -942,6 +942,8 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 
 ╭─❒ 「 Search 」 
 │○ !ytsearch [query]
+│○ !kbbi [query]
+│○ !lirik [query]
 │○ !wallpaper [query]
 │○ !google [query]
 │○ !wikimedia [query]
@@ -1149,6 +1151,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 
 ╭─❒ 「 Nsfw & Sfw 」
 │○ !cuddle
+│○ !feed
 │○ !foxgirl
 │○ !kemonomimi2
 │○ !woof
@@ -1164,9 +1167,9 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !tickle
 │○ !baka
 │○ !smug
-│○ !neko_sfw
+│○ !neko-sfw
 │○ !hentai
-│○ !hentai_gif
+│○ !hentai-gif
 │○ !spank
 │○ !blowjob
 │○ !cumarts
@@ -1180,6 +1183,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !feetgif
 │○ !femdom
 │○ !futanari
+│○ !hentai
 │○ !holoero
 │○ !holo
 │○ !keta
@@ -1187,8 +1191,8 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !kemonomimi
 │○ !pussyart
 │○ !pussywankgif
-│○ !girl_solo
-│○ !girl_solo_gif
+│○ !girl-solo
+│○ !girl-solo-gif
 │○ !tits
 │○ !trap
 │○ !yuri
@@ -1201,7 +1205,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !kuni
 │○ !lesbian
 │○ !neko
-│○ !neko_gif
+│○ !neko-gif
 │○ !ahegao
 │○ !bdsm
 │○ !cuckold
@@ -1211,7 +1215,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !glasses
 │○ !jahy
 │○ !masturbation
-│○ !nsfw_neko
+│○ !nsfw-neko
 │○ !orgy
 │○ !panties
 │○ !tentacles
@@ -1306,23 +1310,23 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !game8bit text|text2
 │○ !layered text|text2
 │○ !glitch2 text|text2
-│○ !coolg text|text2
-│○ !coolwg text|text2
+│○ !cool-graffiti text|text2
+│○ !cool-wall-graffiti text|text2
 │○ !realistic text|text2
 │○ !space3d text|text2
-│○ !gtiktok text|text2
+│○ !glitch-tiktok text|text2
 │○ !stone text|text2
 │○ !marvel text|text2
 │○ !marvel2 text|text2
 │○ !pornhub text|text2
 │○ !avengers text|text2
-│○ !metalr text|text2
-│○ !metalg text|text2
-│○ !metalg2 text|text2
+│○ !metal-rainbow text|text2
+│○ !metal-gold text|text2
+│○ !metal-galaxy text|text2
 │○ !halloween2 text|text2
 │○ !lion text|text2
-│○ !wolf_bw text|text2
-│○ !wolf_g text|text2
+│○ !wolf-black-white text|text2
+│○ !wolf-galaxy text|text2
 │○ !ninja text|text2
 │○ !3dsteel text|text2
 │○ !horror2 text|text2
@@ -1330,7 +1334,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !bagel text|text2
 │○ !blackpink text
 │○ !rainbow2 text
-│○ !water_pipe text
+│○ !water-pipe text
 │○ !halloween text
 │○ !sketch text
 │○ !sircuit text
@@ -1345,7 +1349,7 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !3dstone text
 │○ !neon text
 │○ !glitch text
-│○ !harry_potter text
+│○ !harry-potter text
 │○ !embossed text
 │○ !broken text
 │○ !papercut text
@@ -1353,12 +1357,12 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !glossy text
 │○ !watercolor text
 │○ !multicolor text
-│○ !neon_devil text
+│○ !neon-devil text
 │○ !underwater text
 │○ !bear text
-│○ !wonderfulg text
+│○ !wonderful-graffiti text
 │○ !christmas text
-│○ !neon_light text
+│○ !neon-light text
 │○ !snow text
 │○ !cloudsky text
 │○ !luxury2 text
@@ -1374,55 +1378,55 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !minion text
 │○ !holographic text
 │○ !purple text
-│○ !glossyb text
-│○ !deluxe2 text
-│○ !glossyc text
+│○ !glossy-blue text
+│○ !deluxe-gold text
+│○ !glossy-carbon text
 │○ !fabric text
 │○ !neonc text
 │○ !newyear text
 │○ !newyear2 text
-│○ !metals text
+│○ !metal-silver text
 │○ !xmas text
 │○ !blood text
-│○ !darkg text
+│○ !dark-gold text
 │○ !joker text
 │○ !wicker text
 │○ !natural text
 │○ !firework text
 │○ !skeleton text
-│○ !balloon text
-│○ !balloon2 text
-│○ !balloon3 text
-│○ !balloon4 text
-│○ !balloon5 text
-│○ !balloon6 text
-│○ !balloon7 text
+│○ !red-balloon text
+│○ !purple-balloon text
+│○ !pink-balloon text
+│○ !green-balloon text
+│○ !cyan-balloon text
+│○ !blue-balloon text
+│○ !gold-balloon text
 │○ !steel text
 │○ !gloss text
 │○ !denim text
 │○ !decorate text
-│○ !decorate2 text
+│○ !decorate-purple text
 │○ !peridot text
 │○ !rock text
-│○ !glass text
-│○ !glass2 text
-│○ !glass3 text
-│○ !glass4 text
-│○ !glass5 text
-│○ !glass6 text
-│○ !glass7 text
-│○ !glass8 text
-│○ !captain_as2 text
+│○ !yellow-glass text
+│○ !purple-glass text
+│○ !orange-glass text
+│○ !green-glass text
+│○ !cyan-glass text
+│○ !blue-glass text
+│○ !red-glass text
+│○ !purple-shiny-glass text
+│○ !captain-as2 text
 │○ !robot text
 │○ !equalizer text
 │○ !toxic text
-│○ !sparkling text
-│○ !sparkling2 text
-│○ !sparkling3 text
-│○ !sparkling4 text
-│○ !sparkling5 text
-│○ !sparkling6 text
-│○ !sparkling7 text
+│○ !pink-sparkling text
+│○ !blue-sparkling text
+│○ !green-sparkling text
+│○ !purple-sparkling text
+│○ !gold-sparkling text
+│○ !red-sparkling text
+│○ !cyan-sparkling text
 │○ !decorative text
 │○ !chocolate text
 │○ !strawberry text
@@ -1434,9 +1438,9 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !thunder2 text
 │○ !3dbox text
 │○ !neon2 text
-│○ !roadw text
+│○ !road-warning text
 │○ !bokeh text
-│○ !gneon text
+│○ !green-neon text
 │○ !advanced text
 │○ !dropwater text
 │○ !wall text
@@ -1452,36 +1456,36 @@ exports.listMenu = (time, salam, pushname, prefix) => {
 │○ !biscuit text
 │○ !wood text
 │○ !scifi text
-│○ !metalr text
-│○ !purpleg text
+│○ !metal-rainbow text
+│○ !metal-rose-gold text
+│○ !purple-gem text
 │○ !shiny text 
-│○ !jewelry text
-│○ !jewelry2 text
-│○ !jewelry3 text
-│○ !jewelry4 text
-│○ !jewelry5 text
-│○ !jewelry6 text
-│○ !jewelry7 text
-│○ !jewelry8 text
-│○ !metalh text
+│○ !yellow-jewelry text
+│○ !silver-jewelry text
+│○ !red-jewelry text
+│○ !purple-jewelry text
+│○ !orange-jewelry text
+│○ !green-jewelry text
+│○ !cyan-jewelry text
+│○ !blue-jewelry text
+│○ !hot-metal text
 │○ !golden text
-│○ !glitter text
-│○ !glitter2 text
-│○ !glitter3 text
-│○ !glitter4 text
-│○ !glitter5 text
-│○ !glitter6 text
-│○ !glitter7 text
-│○ !metale text
+│○ !blue-glitter text
+│○ !purple-glitter text
+│○ !pink-glitter text
+│○ !green-glitter text
+│○ !silver-glitter text
+│○ !gold-glitter text
+│○ !bronze-glitter text
+│○ !eroded-metal text
 │○ !carbon text
 │○ !candy text
-│○ !metalb text
-│○ !gemb text
+│○ !blue-metal text
+│○ !blue-gem text
 │○ !3dchrome text
-│○ !metalb2 text
-│○ !metalg text
-╰❒ !metalg text
-
+│○ !black-metal text
+╰❒ !metal-gold text
+ 
 
 ╭─❒ 「 Others 」
 │○ !afk [reason]
@@ -1777,7 +1781,7 @@ exports.source = () =>{
 return`*------「 SOURCE CODE 」 ------*
 
 Base : https://github.com/DikaArdnt/Hisoka-Morou
-Recode : https://youtube.com/playlist?list=PLFCglBzFPHG7vSQaa9S3P8yfla_d9w-2-
+Recode : https://s.id/YouTube-Zeeoneofc
 `
 }
 exports.tos = (ownernomer) => {
@@ -1788,9 +1792,6 @@ Hai kak ☺️
 Kalian bisa mendukung saya agar bot ini tetap up to date dengan cara donasi
 
 Berapapun donasi kalian akan sangat berarti 👍
-Buat kalian yang sudah donasi bisa kirim bukti
-donasi ke owner agar bisa di masukkan ke list donasi
-
 Thanks!
 
 Contact person Owner:
@@ -1813,8 +1814,6 @@ exports.info = (prefix) =>{
 exports.ownermenu = (prefix) =>{
 return`╭─❒ 「 Owner 」 
 │○ !setmenu [query]
-│○ !setmenu templateLocation
-│○ !setmenu templateTenor
 │○ !setmenu katalog
 │○ !setmenu katalog2
 │○ !setmenu list
@@ -1848,6 +1847,7 @@ return`╭─❒ 「 Owner 」
 │○ !autorespond [on/off]
 │○ !antiviewonce [on/off]
 │○ !autobio [on/off]
+│○ !anticall [on/off]
 │○ !join [link]
 │○ !self
 │○ !public [only bot]
@@ -1918,6 +1918,7 @@ exports.group = (prefix) =>{
 │○ !deldemote
 │○ !nsfw [on/off]
 │○ !antilink [on/off]
+│○ !antiwame [on/off]
 │○ !take packname|author
 │○ !group [open/close]
 │○ !tagall [text]
@@ -1951,6 +1952,8 @@ exports.stalk = (prefix) =>{
 exports.search = (prefix) =>{
 	return`╭─❒ 「 Search 」 
 │○ !ytsearch [query]
+│○ !kbbi [query]
+│○ !lirik [query]
 │○ !wallpaper [query]
 │○ !google [query]
 │○ !wikimedia [query]
@@ -2126,9 +2129,9 @@ exports.nsfw = (prefix) =>{
 │○ !tickle
 │○ !baka
 │○ !smug
-│○ !neko_sfw
+│○ !neko-sfw
 │○ !hentai
-│○ !hentai_gif
+│○ !hentai-gif
 │○ !spank
 │○ !blowjob
 │○ !cumarts
@@ -2150,8 +2153,8 @@ exports.nsfw = (prefix) =>{
 │○ !kemonomimi
 │○ !pussyart
 │○ !pussywankgif
-│○ !girl_solo
-│○ !girl_solo_gif
+│○ !girl-solo
+│○ !girl-solo-gif
 │○ !tits
 │○ !trap
 │○ !yuri
@@ -2164,7 +2167,7 @@ exports.nsfw = (prefix) =>{
 │○ !kuni
 │○ !lesbian
 │○ !neko
-│○ !neko_gif
+│○ !neko-gif
 │○ !ahegao
 │○ !bdsm
 │○ !cuckold
@@ -2174,7 +2177,7 @@ exports.nsfw = (prefix) =>{
 │○ !glasses
 │○ !jahy
 │○ !masturbation
-│○ !nsfw_neko
+│○ !nsfw-neko
 │○ !orgy
 │○ !panties
 │○ !tentacles
@@ -2190,23 +2193,23 @@ exports.textpro = (prefix) =>{
 │○ !game8bit text|text2
 │○ !layered text|text2
 │○ !glitch2 text|text2
-│○ !coolg text|text2
-│○ !coolwg text|text2
+│○ !cool-graffiti text|text2
+│○ !cool-wall-graffiti text|text2
 │○ !realistic text|text2
 │○ !space3d text|text2
-│○ !gtiktok text|text2
+│○ !glitch-tiktok text|text2
 │○ !stone text|text2
 │○ !marvel text|text2
 │○ !marvel2 text|text2
 │○ !pornhub text|text2
 │○ !avengers text|text2
-│○ !metalr text|text2
-│○ !metalg text|text2
-│○ !metalg2 text|text2
+│○ !metal-rainbow text|text2
+│○ !metal-gold text|text2
+│○ !metal-galaxy text|text2
 │○ !halloween2 text|text2
 │○ !lion text|text2
-│○ !wolf_bw text|text2
-│○ !wolf_g text|text2
+│○ !wolf-black-white text|text2
+│○ !wolf-galaxy text|text2
 │○ !ninja text|text2
 │○ !3dsteel text|text2
 │○ !horror2 text|text2
@@ -2214,7 +2217,7 @@ exports.textpro = (prefix) =>{
 │○ !bagel text|text2
 │○ !blackpink text
 │○ !rainbow2 text
-│○ !water_pipe text
+│○ !water-pipe text
 │○ !halloween text
 │○ !sketch text
 │○ !sircuit text
@@ -2229,7 +2232,7 @@ exports.textpro = (prefix) =>{
 │○ !3dstone text
 │○ !neon text
 │○ !glitch text
-│○ !harry_potter text
+│○ !harry-potter text
 │○ !embossed text
 │○ !broken text
 │○ !papercut text
@@ -2237,12 +2240,12 @@ exports.textpro = (prefix) =>{
 │○ !glossy text
 │○ !watercolor text
 │○ !multicolor text
-│○ !neon_devil text
+│○ !neon-devil text
 │○ !underwater text
 │○ !bear text
-│○ !wonderfulg text
+│○ !wonderful-graffiti text
 │○ !christmas text
-│○ !neon_light text
+│○ !neon-light text
 │○ !snow text
 │○ !cloudsky text
 │○ !luxury2 text
@@ -2258,55 +2261,55 @@ exports.textpro = (prefix) =>{
 │○ !minion text
 │○ !holographic text
 │○ !purple text
-│○ !glossyb text
-│○ !deluxe2 text
-│○ !glossyc text
+│○ !glossy-blue text
+│○ !deluxe-gold text
+│○ !glossy-carbon text
 │○ !fabric text
 │○ !neonc text
 │○ !newyear text
 │○ !newyear2 text
-│○ !metals text
+│○ !metal-silver text
 │○ !xmas text
 │○ !blood text
-│○ !darkg text
+│○ !dark-gold text
 │○ !joker text
 │○ !wicker text
 │○ !natural text
 │○ !firework text
 │○ !skeleton text
-│○ !balloon text
-│○ !balloon2 text
-│○ !balloon3 text
-│○ !balloon4 text
-│○ !balloon5 text
-│○ !balloon6 text
-│○ !balloon7 text
+│○ !red-balloon text
+│○ !purple-balloon text
+│○ !pink-balloon text
+│○ !green-balloon text
+│○ !cyan-balloon text
+│○ !blue-balloon text
+│○ !gold-balloon text
 │○ !steel text
 │○ !gloss text
 │○ !denim text
 │○ !decorate text
-│○ !decorate2 text
+│○ !decorate-purple text
 │○ !peridot text
 │○ !rock text
-│○ !glass text
-│○ !glass2 text
-│○ !glass3 text
-│○ !glass4 text
-│○ !glass5 text
-│○ !glass6 text
-│○ !glass7 text
-│○ !glass8 text
-│○ !captain_as2 text
+│○ !yellow-glass text
+│○ !purple-glass text
+│○ !orange-glass text
+│○ !green-glass text
+│○ !cyan-glass text
+│○ !blue-glass text
+│○ !red-glass text
+│○ !purple-shiny-glass text
+│○ !captain-as2 text
 │○ !robot text
 │○ !equalizer text
 │○ !toxic text
-│○ !sparkling text
-│○ !sparkling2 text
-│○ !sparkling3 text
-│○ !sparkling4 text
-│○ !sparkling5 text
-│○ !sparkling6 text
-│○ !sparkling7 text
+│○ !pink-sparkling text
+│○ !blue-sparkling text
+│○ !green-sparkling text
+│○ !purple-sparkling text
+│○ !gold-sparkling text
+│○ !red-sparkling text
+│○ !cyan-sparkling text
 │○ !decorative text
 │○ !chocolate text
 │○ !strawberry text
@@ -2318,9 +2321,9 @@ exports.textpro = (prefix) =>{
 │○ !thunder2 text
 │○ !3dbox text
 │○ !neon2 text
-│○ !roadw text
+│○ !road-warning text
 │○ !bokeh text
-│○ !gneon text
+│○ !green-neon text
 │○ !advanced text
 │○ !dropwater text
 │○ !wall text
@@ -2336,35 +2339,35 @@ exports.textpro = (prefix) =>{
 │○ !biscuit text
 │○ !wood text
 │○ !scifi text
-│○ !metalr text
-│○ !purpleg text
+│○ !metal-rainbow text
+│○ !metal-rose-gold text
+│○ !purple-gem text
 │○ !shiny text 
-│○ !jewelry text
-│○ !jewelry2 text
-│○ !jewelry3 text
-│○ !jewelry4 text
-│○ !jewelry5 text
-│○ !jewelry6 text
-│○ !jewelry7 text
-│○ !jewelry8 text
-│○ !metalh text
+│○ !yellow-jewelry text
+│○ !silver-jewelry text
+│○ !red-jewelry text
+│○ !purple-jewelry text
+│○ !orange-jewelry text
+│○ !green-jewelry text
+│○ !cyan-jewelry text
+│○ !blue-jewelry text
+│○ !hot-metal text
 │○ !golden text
-│○ !glitter text
-│○ !glitter2 text
-│○ !glitter3 text
-│○ !glitter4 text
-│○ !glitter5 text
-│○ !glitter6 text
-│○ !glitter7 text
-│○ !metale text
+│○ !blue-glitter text
+│○ !purple-glitter text
+│○ !pink-glitter text
+│○ !green-glitter text
+│○ !silver-glitter text
+│○ !gold-glitter text
+│○ !bronze-glitter text
+│○ !eroded-metal text
 │○ !carbon text
 │○ !candy text
-│○ !metalb text
-│○ !gemb text
+│○ !blue-metal text
+│○ !blue-gem text
 │○ !3dchrome text
-│○ !metalb2 text
-│○ !metalg text
-╰❒ !metalg text
+│○ !black-metal text
+╰❒ !metal-gold text
 `
 }
 
